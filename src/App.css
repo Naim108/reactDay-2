@@ -50,3 +50,15 @@
   width: 800px;
   text-align: center;
 }
+.btn{
+  background-color: rgb(65, 224, 224);
+  padding: 10px;
+  border: 2px solid rgb(65, 224, 224);
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}

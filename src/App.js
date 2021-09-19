@@ -1,38 +1,46 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const studentName=[
-    { name:"Sofiq",learning:"Web Development"},
-    { name:"Rofiq",learning:"Web Development"},
-    { name:"Lofiq",learning:"Web Development"},
-    { name:"Dofiq",learning:"Web Development"},
-    { name:"Jofiq",learning:"Web Development"},
-    { name:"Milad",learning:"Web Development"},
-  ]
+
 
 
   return (
     <div className="App">
-      <ul>
-      <Student></Student>
-        {
-          studentName.map(student=><Student name={student.name} learning={student.learning}></Student>)
-        }
-        
-      </ul>
+      <ExternalUser></ExternalUser>
+      {/* <Counter></Counter> */}
+
       
 
     </div>
   );
 }
-function Student(props){
+function ExternalUser(){
+  const [users,setUsers]=useState([])
+  useEffect(()=>{
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then(res=>res.json())
+    .then(data=>setUsers(data))
+  }
+  ,[])
+  return(
+    <div>
+      <h1>External User</h1>
+      {
+        users.map(user=> <User name={user.name} email={user.email}></User> )
+      }
+    </div>
+  )
+}
+function User(props){
   return(
     <div className="person">
-      <h2>Name: {props.name}</h2>
-      <h4>Course content: {props.learning}</h4>
+      <h4>{props.name}</h4>
+      <p>{props.email}</p>
     </div>
   )
+
 }
 
 
@@ -40,53 +48,27 @@ function Student(props){
 
 
 
-// comment
-/* function App() {
-  const playerName=["Sakib Al Hasan","Mahmudullah Riyad","Mushfiq", "Sohan","Mustafiz","Mithun", "Sabbir"]
+function Counter(){
+  const [count,setCount]=useState(0)
+  // console.log(count,setCount)
+  const handleIncrease=()=>{
+    const newCount=count+1
+    setCount(newCount)
+  };
+  const handleDecrease=()=>{setCount(count-1)
+  };
 
+  
 
-  return (
-    <div className="App">
-      <ul>
-        {
-          playerName.map(player=><li>{player} </li>)
-        }
-
-
-
-       <li>{playerName[0]}</li>
-        <li>{playerName[2]}</li>
-        <li>{playerName[2]}</li>
-        <li>{playerName[3]}</li>
-        <li>{playerName[4]}</li>
-        <li>{playerName[5]}</li> 
-        
-      </ul>
-<Person name={playerName[0]} learning="Crickter" country="Bangladesh" formate="ODI"></Person>
-<Person name={playerName[1]} learning="Crickter" country="Bangladesh" formate="Test"></Person>
-<Person name={playerName[2]} learning="Crickter" country="Bangladesh" formate="Test"></Person>
-<Person name={playerName[3]} learning="Crickter" country="Bangladesh" formate="Test"></Person>
-<Person name={playerName[4]} learning="Crickter" country="Bangladesh" formate="Test"></Person>
-<Person name={playerName[5]} learning="Crickter" country="Bangladesh" formate="Test"></Person>
-<Person name={playerName[6]} learning="Crikcter" country="Bangladesh" formate="Test"></Person>
-
-    </div>
-  );
-}
-function Person(props){
-  // console.log(props)
-  const person={
-    backgroundColor:'lightblue',padding: '5px',
-    margin:'10px',
-    border:'3px solid gray'
-  }
   return(
-    <div style={person}>
-      <h1>Name: {props.name}</h1>
-      <h3>Profession: {props.learning}</h3>
+    <div>
+      <h2>Count: {count} </h2>
+      <button className="btn" onClick={handleIncrease}>increase</button>
+      <button className="btn" onClick={handleDecrease}>Decrease</button>
+
     </div>
   )
-} */
+}
 
 
 
